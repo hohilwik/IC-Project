@@ -8,16 +8,22 @@ p = 0.015;
 N = 1000;
 
 
-for loop=1:5 % five P_E values should be recorded out of which the min(P_E) belongs to the best code generated
+ % five P_E values should be recorded out of which the min(P_E) belongs to the best code generated
+for loop=1:5
+
     %Generating a random BSC code
     x = zeros(2^k,n);
     for r = 1:2^k
         x(r,:) = randi([0 1],1,n);
     end
     
-    % flipped code y
+    % flipping code x to get code y
     y = zeros(2^k,n);
+    
+    %assigning random probabilities to every bit of the codewords
     prob = rand(size(x));
+    
+    %flipping
     r =1:2^k;
     c = 1:n;
     if prob(r,c) < p
@@ -31,12 +37,18 @@ for loop=1:5 % five P_E values should be recorded out of which the min(P_E) belo
     %disp(x);
     E = 0;
     %rate = k/n;
+    
+    % conducting N iterations
     for iteration =1:N
         %disp(x)
+        
+        %selecting a random codeword by picking a random row index 
         cod_wrd = randi([1 ,2^k]);
 
         % minimum distance decoding algorithm
         d_h = zeros(2^k,1);
+        
+        %calculating tha hamming distances of all the original codewords and the flipped codeword
         for i = 1:2^k
             count = 0;
             for j=1:n
@@ -47,14 +59,17 @@ for loop=1:5 % five P_E values should be recorded out of which the min(P_E) belo
             d_h(i,1) = count;
         end
         %disp(d_h)
-
+        
+        %finding the minimum hamming distance
         [d_min, index] = min(d_h);
         %disp(d_min);
-
+        
+        % Using the index to obtain the codeword closest to the flipped codeword-eatimate of x
         x_estimate = x(index,:);
         disp(x_estimate);
-        % indicator function
         
+        
+        % indicator function
         
         I = 0;
         if x_estimate ~= x(cod_wrd,j)
@@ -73,6 +88,9 @@ for loop=1:5 % five P_E values should be recorded out of which the min(P_E) belo
 P_E = E/N;
 end
 %disp(P_E)
+
+%Plot P_E against (n,p,k)
+%Comment on observing the Channel capacity for all values of n,p,k
 
 
 
