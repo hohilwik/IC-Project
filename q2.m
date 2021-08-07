@@ -8,7 +8,7 @@ p = 0.015;
 N = 1000;
 
 
- % five P_E values should be recorded out of which the min(P_E) belongs to the best code generated
+% five P_E values should be recorded out of which the min(P_E) belongs to the best code generated
 for loop=1:5
 
     %Generating a random BSC code
@@ -48,37 +48,32 @@ for loop=1:5
         % minimum distance decoding algorithm
         d_h = zeros(2^k,1);
         
-        %calculating tha hamming distances of all the original codewords and the flipped codeword
+        %calculating the hamming distances of all the original codewords and the flipped codeword
         for i = 1:2^k
-            count = 0;
+          count = 0;
             for j=1:n
                 if y(i,j) == x(cod_wrd,j)
                     count = count + 1;
                 end
             end
-            d_h(i,1) = count;
+          d_h(i,1) = count;
         end
         %disp(d_h)
         
         %finding the minimum hamming distance
         [d_min, index] = min(d_h);
         %disp(d_min);
-        
         % Using the index to obtain the codeword closest to the flipped codeword-eatimate of x
         x_estimate = x(index,:);
         disp(x_estimate);
         
-        
         % indicator function
-        
         I = 0;
         if x_estimate ~= x(cod_wrd,j)
             I = 1;
         else
             I = 0;
-        end
-        
-        
+        end        
         %I = piecewise((x_estimate ~= x(cod_wrd,j)),1,(x_estimate == x(cod_wrd,j)),0);
         disp(I);
         E = E + I;
