@@ -1,3 +1,7 @@
+clc
+clear all
+close all
+
 k = 10;
 n=15;
 p = 0.015;
@@ -10,25 +14,24 @@ for loop=1:5 % five P_E values should be recorded out of which the min(P_E) belo
     for r = 1:2^k
         x(r,:) = randi([0 1],1,n);
     end
-
+    
+    % flipped code y
+    y = zeros(2^k,n);
     prob = rand(size(x));
-    for r =1:2^k
-        for c = 1:n
-            if prob(r,c) < p
-                if x(r,c) == 0
-                    x(r,c) = 1;
-                else if x(r,c) == 1
-                        x(r,c) = 0;
-                    end
-                end
-            end
+    r =1:2^k;
+    c = 1:n;
+    if prob(r,c) < p
+        if x(r,c) == 0
+            y(r,c) = 1;
+        else if x(r,c) == 1
+                y(r,c) = 0;
+             end
         end
     end
-        
+    %disp(x);
     E = 0;
     %rate = k/n;
-    iteration =1;
-    while iteration <= N
+    for iteration =1:N
         %disp(x)
         cod_wrd = randi([1 ,2^k]);
 
@@ -37,36 +40,40 @@ for loop=1:5 % five P_E values should be recorded out of which the min(P_E) belo
         for i = 1:2^k
             count = 0;
             for j=1:n
-                if y == x(cod_wrd,j)
+                if y(i,j) == x(cod_wrd,j)
                     count = count + 1;
                 end
             end
             d_h(i,1) = count;
         end
-        disp(d_h)
+        %disp(d_h)
 
         [d_min, index] = min(d_h);
+        %disp(d_min);
 
         x_estimate = x(index,:);
-
+        disp(x_estimate);
         % indicator function
-        %{
+        
+        
         I = 0;
         if x_estimate ~= x(cod_wrd,j)
             I = 1;
+        else
+            I = 0;
         end
-        %}
-        I = piecewise((x_estimate ~= x(cod_wrd,j)),1,(x_estimate == x(cod_wrd,j)),0);
-
+        
+        
+        %I = piecewise((x_estimate ~= x(cod_wrd,j)),1,(x_estimate == x(cod_wrd,j)),0);
+        disp(I);
         E = E + I;
-        iteration = iteration + 1;
     end
 
 % Probability of error
 P_E = E/N;
-disp(P_E)
 end
-%disp(P_E);
+%disp(P_E)
+
 
 
 
