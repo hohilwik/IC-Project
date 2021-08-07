@@ -6,8 +6,8 @@ codeword=cell(1,n);   %where the codewords are going to be stored
 X=zeros(n,n);         %This matrix helps us track which elements we have worked on
 temp=p;
 %%
-%Building the relationship matrix X.This matrix has all elements zero
-%except for few entries which are substituted with 10 or 11.Number 10 denotes this
+%Building the relationship matrix X. This matrix has all elements zero
+%except for a few entries which are substituted with 10 or 11. Number 10 denotes this
 %entry is the minimum in the column and 11 indicates this is the second
 %minimum.the minimum is replaced by 100 and second minimum is replaced by
 %sum of the minimum and the second minimum.And processing for the next
