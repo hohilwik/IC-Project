@@ -27,12 +27,7 @@ for loop=1:5
     r =1:2^k;
     c = 1:n;
     if prob(r,c) < p
-        if x(r,c) == 0
-            y(r,c) = 1;
-        else if x(r,c) == 1
-                y(r,c) = 0;
-             end
-        end
+         y(r,c) = abs( x(r,c)-1 );
     end
     %disp(x);
     E = 0;
