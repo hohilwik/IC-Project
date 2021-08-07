@@ -43,7 +43,7 @@ for loop=1:5
         %disp(x)
         
         %selecting a random codeword by picking a random row index 
-        cod_wrd = randi([1 ,2^k]);
+        code_word = randi([1 ,2^k]);
 
         % minimum distance decoding algorithm
         d_h = zeros(2^k,1);
