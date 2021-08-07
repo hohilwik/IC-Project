@@ -6,6 +6,8 @@ coded_data1 = encodemessage(message1, symb1, codeword1);
 fileID = fopen('encoded_file1.txt','w');
 fprintf(fileID, '%c', coded_data1);
 fclose(fileID);
+encoded_message1 = read_file('encoded_file1.txt');
+decoded_message1 = huffman_decode2(symb1, codeword1, encoded_message1);
 
 message2 = read_file('file2.txt');
 [symb2, prob2] = analyze_file(message2);
@@ -15,6 +17,8 @@ coded_data2 = encodemessage(message2, symb2, codeword2);
 fileID = fopen('encoded_file2.txt','w');
 fprintf(fileID, '%c', coded_data2);
 fclose(fileID);
+encoded_message2 = read_file('encoded_file2.txt');
+decoded_message2 = huffman_decode2(symb2, codeword2, encoded_message2);
 
 message3 = read_file('file3.txt');
 [symb3, prob3] = analyze_file(message3);
@@ -24,3 +28,5 @@ coded_data3 = encodemessage(message3, symb3, codeword3);
 fileID = fopen('encoded_file3.txt','w');
 fprintf(fileID, '%c', coded_data3);
 fclose(fileID);
+encoded_message3 = read_file('encoded_file3.txt');
+decoded_message3 = huffman_decode2(symb3, codeword3, encoded_message3);

@@ -1,8 +1,8 @@
 function coded_data = encodemessage(message, symb, codeword)
-    length(symb)=n
+    n=length(symb);
+    codeword = char(codeword);
     for i=1:n
-        indices = find(message==symb(i));
-        message(indices) = codeword(i);
+        message=replace(message, char(symb(i)), codeword(i) );
     end
     coded_data = message;
 end
