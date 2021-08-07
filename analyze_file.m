@@ -1,8 +1,5 @@
-function [message, symbols, probability] = analyze_file(filename, type)
-fileId=fopen(filename,'r');
-message=fscanf(fileId,'%c');
-fclose(fileId);
-if type==0
+
+function [symbols, probability] = analyze_file(message);
 symbols=[];
 probability=[];
 n=length(message);
@@ -16,6 +13,5 @@ while ~isempty(message)
     i=i+1;
 end
 probability=probability/n;
-end
 end
 
